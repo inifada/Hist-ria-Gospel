@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fichas de Construção de História</title>
+  <style>
+    /* Estilos globais */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+    
+    /* Estilos para o conteúdo principal */
+    .main-content {
+      flex: 1;
+      padding: 20px;
+    }
+
+    /* Barra lateral à direita */
+    .sidebar {
+      width: 300px;
+      background-color: #f4f4f4;
+      padding: 20px;
+      position: fixed;
+      top: 0;
+      right: 0;
+      height: 100%;
+      overflow-y: auto;
+      box-shadow: -3px 0 5px rgba(0,0,0,0.2);
+    }
+
+    /* Categorias e fichas */
+    .category {
+      margin-bottom: 20px;
+    }
+
+    .category h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .category ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .category ul li {
+      margin-bottom: 8px;
+    }
+
+    .category ul li a {
+      text-decoration: none;
+      color: #007BFF;
+    }
+
+    .category ul li a:hover {
+      text-decoration: underline;
+    }
+
+    /* Estilos para as fichas dinâmicas */
+    .ficha {
+      background-color: #fff;
+      padding: 15px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    /* Botão para adicionar nova ficha */
+    .add-ficha-btn {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .add-ficha-btn:hover {
+      background-color: #0056b3;
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Conteúdo principal -->
+  <div class="main-content">
+    <h1>Bem-vindo ao Sistema de Fichas de Construção de História</h1>
+    <p>Aqui você pode visualizar e editar suas fichas de personagens, cenários, locais, e muito mais. Selecione as categorias na barra lateral à direita ou crie novas fichas usando o botão abaixo.</p>
+
+    <!-- Container para as fichas adicionadas dinamicamente -->
+    <div id="fichas-container">
+      <!-- Fichas já existentes -->
+      <div class="ficha" id="personagem1">
+        <h2>Personagem 1</h2>
+        <p>Descrição do personagem 1.</p>
+      </div>
+      <div class="ficha" id="cenario1">
+        <h2>Cenário 1</h2>
+        <p>Descrição do cenário 1.</p>
+      </div>
+    </div>
+
+    <!-- Botão para adicionar nova ficha -->
+    <button class="add-ficha-btn" onclick="adicionarFicha()">+ Nova Ficha</button>
+  </div>
+
+  <!-- Barra lateral com categorias -->
+  <div class="sidebar">
+    <div class="category">
+      <h2>Fichas de Personagens</h2>
+      <ul id="lista-personagens">
+        <li><a href="#personagem1">Ficha de Personagem 1</a></li>
+      </ul>
+    </div>
+
+    <div class="category">
+      <h2>Fichas de Cenários</h2>
+      <ul id="lista-cenarios">
+        <li><a href="#cenario1">Ficha de Cenário 1</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    let contadorFichas = 2; // Contador para gerar novos IDs de fichas
+
+    // Função para adicionar uma nova ficha dinamicamente
+    function adicionarFicha() {
+      // Criação dos elementos de ficha
+      const fichaContainer = document.getElementById('fichas-container');
+      const novaFicha = document.createElement('div');
+      novaFicha.classList.add('ficha');
+      novaFicha.id = `personagem${contadorFichas}`;
+      
+      const tituloFicha = document.createElement('h2');
+      tituloFicha.textContent = `Personagem ${contadorFichas}`;
+      
+      const descricaoFicha = document.createElement('p');
+      descricaoFicha.textContent = `Descrição do personagem ${contadorFichas}.`;
+
+      novaFicha.appendChild(tituloFicha);
+      novaFicha.appendChild(descricaoFicha);
+      fichaContainer.appendChild(novaFicha);
+
+      // Adiciona o novo link na barra lateral
+      const listaPersonagens = document.getElementById('lista-personagens');
+      const novoItemLista = document.createElement('li');
+      const novoLink = document.createElement('a');
+      novoLink.href = `#personagem${contadorFichas}`;
+      novoLink.textContent = `Ficha de Personagem ${contadorFichas}`;
+      novoItemLista.appendChild(novoLink);
+      listaPersonagens.appendChild(novoItemLista);
+
+      // Incrementa o contador para o próximo personagem
+      contadorFichas++;
+    }
+  </script>
+
+</body>
+</html>
